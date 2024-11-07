@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ tag.tag_text }}</title>
+</head>
+<body>
+    <h1>{{ tag.tag_text }}</h1>
+    <p><strong>Published on:</strong> {{ tag.pub_date }}</p>
+    <h2>Articles with this tag:</h2>
+    <ul>
+        {% for article in tag.article_set.all %}
+            <li><a href="{% url 'article_detail' article.id %}">{{ article.headline }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

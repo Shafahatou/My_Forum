@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mon site Django{% endblock %}</title>
+    <!-- Inclusion de fichiers CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    {% load static %}
+    <style>
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-light custom-margin" data-bs-theme="light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'index' %}">✍ The Forum</a>
+                <div class="collapse navbar-collapse" id="navbarColor03">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">About</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <a href="#">{{ user.username }}</a>
+                        <a href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="{% url 'register' %}">Register</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}
+        <!-- le contenu ici -->
+        {% endblock content %}
+    </main>
+    
+    <footer class="text-center mt-4">
+        <p>&copy; 2024 Mon site Django. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Scripts JavaScript -->
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comment by {{ comment.author_name }}</title>
+</head>
+<body>
+    <h1>Comment by {{ comment.author_name }}</h1>
+    <p>{{ comment.content }}</p>
+    <p><strong>Created at:</strong> {{ comment.created_at }}</p>
+    <p><strong>Approved:</strong> {{ comment.approved }}</p>
+    <h2>Related Article:</h2>
+    <p><a href="{% url 'comment_detail' comment.id %}">{{ comment.author_name }}</a>
+    </p>
+</body>
+</html>

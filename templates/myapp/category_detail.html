@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Detail with Comments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #2c3e50;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .comment-form button {
+            background-color: #bd850d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comment-form button:hover {
+            background-color: #b97f29;
+        }
+
+        .comment {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment .author {
+            font-weight: bold;
+            color: #dba334;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Category Details</h1>
+        <p>More details about the category...</p>
+
+        <!-- Formulaire de commentaire -->
+        <div class="comment-form">
+            <textarea placeholder="Write your comment..."></textarea><br>
+            <button>Post Comment</button>
+        </div>
+
+        <!-- Commentaire existant -->
+        <div class="comment">
+            <p class="author">John Doe</p>
+            <p>This is an interesting category. I look forward to more updates!</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

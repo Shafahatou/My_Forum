@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats de Recherche</title>
+</head>
+<body>
+    <h1 style="background-color: rgb(92, 220, 52); ">Résultats de Recherche</h1>
+    <ul>
+        {% for article in results %}
+            <li>
+                <a href="{% url 'article_detail' article.id %}">{{ article.headline }}</a>
+            </li>
+        {% empty %}
+            <li>Aucun résultat trouvé.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

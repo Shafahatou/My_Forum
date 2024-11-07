@@ -1,0 +1,153 @@
+/* Styles généraux pour le body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #d77d17;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Conteneur principal pour centrer l'article */
+.article-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.article-container {
+    max-width: 800px;
+    width: 100%;
+    background-color: #bf8d8d;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+}
+
+/* Styles pour le titre de l'article */
+.article-title {
+    color: #2c3e50;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Styles pour la date, catégorie, et tags */
+.date, .category {
+    color: #7f8c8d;
+    font-size: 1em;
+    margin: 5px 0;
+    text-align: center;
+}
+
+.tags {
+    text-align: center;
+}
+
+.tag {
+    background-color: #6bdcd3;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin: 0 2px;
+    font-size: 0.9em;
+}
+
+/* Styles pour l'image principale */
+.main-image-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.main-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Styles pour les images supplémentaires */
+.additional-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.additional-image-container {
+    flex: 1 1 calc(50% - 10px);
+    text-align: center;
+}
+
+.additional-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+figcaption {
+    color: #95a5a6;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+/* Styles pour le contenu de l'article */
+.content {
+    margin: 20px 0;
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #34495e;
+}
+
+/* Styles pour les commentaires */
+.comments {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.comment {
+    background-color: #ecf0f1;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.comment-date {
+    color: #bdc3c7;
+    font-size: 0.9em;
+}
+
+/* Styles pour le formulaire de commentaire */
+.comment-form {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.comment-form h2 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.comment-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.comment-form button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.comment-form button:hover {
+    background-color: #2980b9;
+}

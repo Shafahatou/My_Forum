@@ -1,0 +1,131 @@
+{% extends "myapp/base.html" %}
+
+{% block content %}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f5f7fa; /* Couleur de fond douce */
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Remplir toute la hauteur de la vue */
+    }
+
+    .w3-container {
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+        border-radius: 15px; /* Coins arrondis */
+        background-color: #ffffff;
+        padding: 30px; /* Espacement interne */
+        width: 400px; /* Largeur fixe */
+    }
+
+    h2 {
+        color: #2466d0; /* Couleur du titre */
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    label {
+        font-size: 1.1em;
+        color: #cb2727; /* Couleur teal */
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        margin-top: 8px;
+        border: 1px solid #ddd;
+        border-radius: 8px; /* Coins arrondis pour les champs de saisie */
+        font-size: 1em;
+        transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+        border-color: #ba8222; /* Couleur du contour au focus */
+        outline: none;
+    }
+
+    button[type="submit"] {
+        background-color: #d48a1b; /* Couleur teal */
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px; /* Coins arrondis */
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 10px;
+        width: 100%; /* Largeur complète pour le bouton */
+    }
+
+    button[type="submit"]:hover {
+        background-color: #c18724; /* Couleur au survol */
+    }
+
+    .w3-panel {
+        background-color: #f44336; /* Fond rouge pour les messages */
+        color: white;
+        border-radius: 8px; /* Coins arrondis */
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    .w3-panel p {
+        margin: 0;
+        font-size: 1.05em;
+        text-align: center;
+    }
+
+    a {
+        color: #2466d0; /* Couleur des liens */
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    a:hover {
+        color: #1e6f9f; /* Couleur des liens au survol */
+    }
+</style>
+
+<div class="container">
+    <div class="w3-container w3-card-4">
+        <h2>Se connecter</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="w3-margin-bottom">
+                <label for="username"><b>Nom d'utilisateur :</b></label>
+                <input type="text" name="username" id="username" placeholder="Entrez votre nom d'utilisateur" required>
+            </div>
+            
+            <div class="w3-margin-bottom">
+                <label for="password"><b>Mot de passe :</b></label>
+                <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe" required>
+            </div>
+
+            <button type="submit">Se connecter</button>
+        </form>
+
+        {% if messages %}
+            <div class="w3-panel">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <div>
+            <p>Vous n'avez pas de compte ? <a href="{% url 'register' %}">Créer un compte</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

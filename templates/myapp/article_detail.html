@@ -1,0 +1,223 @@
+{% extends 'myapp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.headline }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .article-wrapper {
+            max-width: 900px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-container {
+            text-align: center;
+        }
+
+        .article-title {
+            color: #bc6e25;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .date, .category, .tags {
+            font-size: 1em;
+            color: #7f8c8d;
+        }
+
+        .tags .tag {
+            background-color: #d5841a;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        .main-image-container {
+            margin: 20px 0;
+        }
+
+        .main-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .additional-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .additional-image-container {
+            margin: 10px;
+            text-align: center;
+            width: 45%;
+        }
+
+        .additional-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .content {
+            font-size: 1.2em;
+            color: #34495e;
+            line-height: 1.6;
+            margin: 30px 0;
+        }
+
+        /* Section des commentaires */
+        .comments {
+            background-color: rgba(236, 240, 238, 0.886);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .comment {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment p {
+            font-size: 1em;
+            color: #7f8c8d;
+        }
+
+        .comment .comment-date {
+            font-size: 0.9em;
+            color: #bdc3c7;
+            text-align: right;
+        }
+
+        /* Formulaire de commentaire */
+        .comment-form {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .comment-form h2 {
+            color: #601d8d;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            font-size: 1em;
+            resize: vertical;
+        }
+
+        .comment-form button {
+            background-color: #b95b1c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .comment-form button:hover {
+            background-color: #da7f2f;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="article-wrapper">
+        <div class="article-container">
+            <h1 class="article-title">{{ article.headline }}</h1>
+            <p class="date">Publié le : {{ article.pub_date }}</p>
+            <p class="category">Catégorie : {{ article.category.full_name }}</p>
+            <p class="tags">Tags : 
+                {% for tag in article.tags.all %}
+                    <span class="tag">{{ tag.tag_text }}</span>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+    
+            <!-- Image principale -->
+            {% if article.image %}
+                <div class="main-image-container">
+                    <img src="{{ article.image.url }}" alt="{{ article.headline }}" class="main-image">
+                </div>
+            {% endif %}
+    
+            <!-- Images supplémentaires -->
+            {% if article.additional_images.all %}
+                <div class="additional-images">
+                    {% for img in article.additional_images.all %}
+                        <figure class="additional-image-container">
+                            <img src="{{ img.image.url }}" alt="{{ img.description }}" class="additional-image">
+                            {% if img.description %}
+                                <figcaption>{{ img.description }}</figcaption>
+                            {% endif %}
+                        </figure>
+                    {% endfor %}
+                </div>
+            {% endif %}
+    
+            <div class="content">{{ article.content }}</div>
+    
+            <!-- Affichage des commentaires -->
+            <div class="comments">
+                <h2>Commentaires</h2>
+                {% for comment in comments %}
+                    <div class="comment">
+                        <p><strong>{{ comment.author_name }}</strong> a dit :</p>
+                        <p>{{ comment.content }}</p>
+                        <p class="comment-date">{{ comment.created_at }}</p>
+                    </div>
+                {% empty %}
+                    <p>Aucun commentaire pour cet article.</p>
+                {% endfor %}
+            </div>
+
+            {% if user.is_authenticated %}
+            <!-- Formulaire de commentaire -->
+            <div class="comment-form">
+                <h2>Ajouter un commentaire</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+            {% else %}
+                <p>Veuillez vous connecter pour ajouter un commentaire.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}
